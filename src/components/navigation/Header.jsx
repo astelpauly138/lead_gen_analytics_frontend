@@ -2,14 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../AppIcon';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
   const { logout, user } = useAuth();
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -21,10 +19,6 @@ const Header = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const toggleDarkMode = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
 
   const handleLogout = () => {
     logout();
@@ -48,14 +42,6 @@ const Header = () => {
         </div>
 
         <div className="header-right">
-          <button
-            onClick={toggleDarkMode}
-            className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-muted transition-all duration-250 touch-target"
-            aria-label="Toggle dark mode"
-          >
-            <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={20} />
-          </button>
-
           <button
             className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-muted transition-all duration-250 touch-target relative"
             aria-label="Notifications"
