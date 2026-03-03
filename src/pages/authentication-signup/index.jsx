@@ -7,7 +7,7 @@ import Icon from '../../components/AppIcon';
 import appLogo from '../../styles/images/logo.png';
 import { useAuth } from '../../context/AuthContext';
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://lead-gen-analytics-backend.onrender.com";
 
 const AuthenticationSignup = () => {
   const navigate = useNavigate();

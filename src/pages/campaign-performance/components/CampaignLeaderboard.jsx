@@ -6,7 +6,7 @@ const CampaignLeaderboard = ({ campaigns, allCampaigns = [] }) => {
 
   return (
     <>
-      <div className="bg-card border border-border rounded-xl p-4 md:p-6 h-full flex flex-col">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6 flex-1 flex flex-col">
         <div className="flex items-center justify-between mb-6 shrink-0">
           <div>
             <h2 className="text-lg md:text-xl font-semibold text-foreground mb-1">Top Campaigns</h2>

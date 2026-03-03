@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import Sidebar from '../../components/navigation/Sidebar';
 import Header from '../../components/navigation/Header';
@@ -253,6 +253,19 @@ const CampaignPerformance = () => {
 
   const allFiltersAreAll = !filters.category && !filters.city && !filters.country && !filters.dateRange;
 
+  const chartColRef = useRef(null);
+  const [chartHeight, setChartHeight] = useState(null);
+
+  useEffect(() => {
+    const el = chartColRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setChartHeight(entry.contentRect.height);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -324,8 +337,8 @@ const CampaignPerformance = () => {
                   />
 
                   {/* Chart + Leaderboard */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
-                    <div className="lg:col-span-8 animate-fade-in">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 items-start">
+                    <div ref={chartColRef} className="lg:col-span-8 animate-fade-in">
                       <CampaignChart
                         data={chartData}
                         chartTimeRange={chartTimeRange}
@@ -333,7 +346,10 @@ const CampaignPerformance = () => {
                         filtersActive={!allFiltersAreAll}
                       />
                     </div>
-                    <div className="lg:col-span-4 animate-fade-in">
+                    <div
+                      className="lg:col-span-4 animate-fade-in flex flex-col"
+                      style={chartHeight ? { height: `${chartHeight}px` } : {}}
+                    >
                       <CampaignLeaderboard campaigns={topCampaigns} allCampaigns={allCampaigns} />
                     </div>
                   </div>

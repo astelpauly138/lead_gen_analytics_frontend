@@ -40,7 +40,7 @@ const ActivityFeed = ({ activities = [] }) => {
   };
 
   return (
-    <div className="bg-card border border-border rounded-xl p-4 md:p-6 shadow-sm h-full flex flex-col">
+    <div className="bg-card border border-border rounded-xl p-4 md:p-6 shadow-sm flex flex-col h-full">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center w-10 h-10 bg-success/20 rounded-lg">

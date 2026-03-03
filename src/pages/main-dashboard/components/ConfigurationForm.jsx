@@ -408,9 +408,9 @@ const ConfigurationForm = ({ onSubmit, dashboardData = {} }) => {
 
       {/* Results State - Only show when list is requested */}
       {hasLeads && showList && !isSubmitting && (
-        <div className="gap-4 flex-1 flex flex-col overflow-hidden">
+        <div className="flex flex-col gap-4">
           {/* Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-shrink-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-1 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-4">
               <p className="caption text-muted-foreground text-xs mb-2">Pending for Approval</p>
               <p className="text-3xl font-bold text-primary">
@@ -426,9 +426,9 @@ const ConfigurationForm = ({ onSubmit, dashboardData = {} }) => {
           </div>
 
           {/* Lead List - Toggle between Pending and Sent */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="bg-card border border-border rounded-lg p-3 flex-1 flex flex-col overflow-hidden">
-              <div className="flex-1 overflow-y-auto">
+          <div>
+            <div className="bg-card border border-border rounded-lg p-3">
+              <div className="overflow-y-auto" style={{ maxHeight: '380px', scrollbarWidth: 'thin', scrollbarColor: 'var(--color-border) transparent' }}>
                 <table className="w-full">
                   <thead className="bg-muted border-b border-border sticky top-0 z-10">
                     <tr>
@@ -505,7 +505,7 @@ const ConfigurationForm = ({ onSubmit, dashboardData = {} }) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             {activeView === 'pending' && (
               <Button
                 type="button"

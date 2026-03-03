@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Icon from '../../../components/AppIcon';
 
-const KPICard = ({ title, value, change, changeType, icon, sparklineData, color }) => {
+const KPICard = ({ title, value, change, changeType, icon, sparklineData, color, suffix }) => {
   const [animatedValue, setAnimatedValue] = useState(0);
   const prevValueRef = useRef(animatedValue);
 
@@ -57,7 +57,7 @@ const KPICard = ({ title, value, change, changeType, icon, sparklineData, color 
         <div className="flex-1">
           <p className="caption text-muted-foreground text-xs md:text-sm mb-1">{title}</p>
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground data-text">
-            {animatedValue?.toLocaleString()}
+            {animatedValue?.toLocaleString()}{suffix}
           </h3>
         </div>
         <div

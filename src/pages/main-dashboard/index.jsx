@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import Sidebar from '../../components/navigation/Sidebar';
 import Header from '../../components/navigation/Header';
@@ -162,6 +162,19 @@ const MainDashboard = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
+  const formColRef = useRef(null);
+  const [configHeight, setConfigHeight] = useState(null);
+
+  useEffect(() => {
+    const el = formColRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setConfigHeight(entry.contentRect.height);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   const handleQuickAction = async (actionId) => {
     if (actionId === 'refresh') {
       setIsRefreshing(true);
@@ -171,7 +184,7 @@ const MainDashboard = () => {
       setIsExporting(true);
       try {
         const token = localStorage.getItem('access_token');
-        const response = await fetch(`http://127.0.0.1:8000/export_approved/${user.user_id}`, {
+        const response = await fetch(`https://lead-gen-analytics-backend.onrender.com/export_approved/${user.user_id}`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -289,6 +302,7 @@ const MainDashboard = () => {
                 changeType={kpiData?.successRate?.changeType}
                 icon="TrendingUp"
                 color="var(--color-accent)"
+                suffix="%"
               />
             </div>
 
@@ -296,12 +310,15 @@ const MainDashboard = () => {
               <QuickActions onActionClick={handleQuickAction} isRefreshing={isRefreshing} isExporting={isExporting} />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-              <div className="lg:col-span-8 min-h-[700px]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+              <div ref={formColRef} className="lg:col-span-8 flex flex-col">
                 <ConfigurationForm onSubmit={handleConfigSubmit} dashboardData={dashboardData} />
               </div>
 
-              <div className="lg:col-span-4">
+              <div
+                className="lg:col-span-4 flex flex-col"
+                style={configHeight ? { height: `${configHeight}px` } : {}}
+              >
                 <ActivityFeed activities={activities} />
               </div>
             </div>
