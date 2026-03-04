@@ -46,7 +46,7 @@ const Sidebar = ({ isCollapsed = false }) => {
     <aside
       className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}
     >
-      <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/main-dashboard')}>
         <img src={analyticaLogo} alt="Analytica" className="sidebar-brand-text-logo" style={{ height: '22px', objectFit: 'contain' }} />
         <img src={logoIcon} alt="Analytica" className="sidebar-brand-icon-logo" style={{ height: '32px', width: '32px', objectFit: 'contain' }} />
       </div>
