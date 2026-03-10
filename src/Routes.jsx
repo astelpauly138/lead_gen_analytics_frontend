@@ -12,6 +12,8 @@ import MainDashboard from './pages/main-dashboard';
 import LeadAnalyticsSheet from './pages/lead-analytics-sheet';
 import SettingsDashboard from './pages/settings-dashboard';
 import CampaignPerformance from './pages/campaign-performance';
+import EmailConfiguration from './pages/email-configuration';
+import BillingPage from './pages/billing';
 
 const Routes = () => {
   return (
@@ -58,15 +60,32 @@ const Routes = () => {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/campaign-performance" 
+            <Route
+              path="/campaign-performance"
               element={
                 <ProtectedRoute>
                   <CampaignPerformance />
                 </ProtectedRoute>
-              } 
+              }
+            />
+            <Route
+              path="/email-configuration"
+              element={
+                <ProtectedRoute>
+                  <EmailConfiguration />
+                </ProtectedRoute>
+              }
             />
             
+            <Route
+              path="/billing"
+              element={
+                <ProtectedRoute>
+                  <BillingPage />
+                </ProtectedRoute>
+              }
+            />
+
             {/* 404 Not Found */}
             <Route path="*" element={<NotFound />} />
           </RouterRoutes>

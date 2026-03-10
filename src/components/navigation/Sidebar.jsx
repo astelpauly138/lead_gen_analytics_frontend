@@ -27,6 +27,18 @@ const Sidebar = ({ isCollapsed = false }) => {
       tooltip: 'Comprehensive lead database management with advanced filtering'
     },
     {
+      label: 'Email Config',
+      path: '/email-configuration',
+      icon: 'Mail',
+      tooltip: 'Configure SMTP and email delivery settings'
+    },
+    {
+      label: 'Billing',
+      path: '/billing',
+      icon: 'CreditCard',
+      tooltip: 'Manage your subscription and billing plans'
+    },
+    {
       label: 'Settings',
       path: '/settings-dashboard',
       icon: 'Settings',
